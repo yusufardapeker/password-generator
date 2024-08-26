@@ -7,12 +7,12 @@ import GenerateButton from "./GenerateButton";
 
 function index() {
 	return (
-		<>
+		<div className="generator">
 			<CharLength />
 			<CharRules />
 			<Strength />
 			<GenerateButton />
-		</>
+		</div>
 	);
 }
 

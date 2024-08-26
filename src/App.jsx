@@ -6,10 +6,10 @@ import Geneator from "./components/Generator";
 
 function App() {
 	return (
-		<>
+		<div className="container">
 			<Result />
 			<Geneator />
-		</>
+		</div>
 	);
 }
 
