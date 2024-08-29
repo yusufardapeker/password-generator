@@ -162,6 +162,25 @@ body {
 						height: 24px;
 						border: 1px solid $white;
 					}
+
+					@mixin activeStrength() {
+						border-color: $light-green;
+						background-color: $light-green;
+					}
+
+					.Weak:nth-child(1) {
+						@include activeStrength();
+					}
+
+					.Easy:where(:nth-child(1), :nth-child(2)) {
+						@include activeStrength();
+					}
+					.Medium:where(:nth-child(1), :nth-child(2), :nth-child(3)) {
+						@include activeStrength();
+					}
+					.Hard:where(:nth-child(1), :nth-child(2), :nth-child(3), :nth-child(4)) {
+						@include activeStrength();
+					}
 				}
 			}
 		}
