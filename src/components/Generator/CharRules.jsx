@@ -2,53 +2,47 @@ import React from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { setToGenerateLetters } from "../../redux/generatorSlice";
 
-const inputTexts = [
-	"Include Uppercase Letters",
-	"Include Lowercase Letters",
-	"Include Numbers",
-	"Include Symbols",
-];
-
 function CharRules() {
 	const { toGenerateLetters } = useSelector((store) => store.generator);
 	const dispatch = useDispatch();
 
-	const letterRules = [
+	const ruleInputs = [
 		{
-			Lowercase: "abcdefghijklmnopqrstuvwxyz",
+			text: "Include Uppercase Letters",
+			rule: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
 		},
 
 		{
-			Uppercase: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
+			text: "Include Lowercase Letters",
+			rule: "abcdefghijklmnopqrstuvwxyz",
 		},
 
 		{
-			Numbers: "123456789",
+			text: "Include Numbers",
+			rule: "123456789",
 		},
 
 		{
-			Symbols: "#$+%&?*",
+			text: "Include Symbols",
+			rule: "#$+%&?*",
 		},
 	];
 
 	const handleCharRules = (e) => {
 		const clickedElement = e.target;
 		const isClickedElementChecked = clickedElement.checked;
-		const clickedElementText = clickedElement.parentNode.childNodes[1].textContent.split(" ")[1];
+		const clickedElementText = clickedElement.parentNode.childNodes[1].textContent;
 
 		if (isClickedElementChecked) {
-			letterRules.forEach((rule) => {
-				if (Object.keys(rule)[0] === clickedElementText) {
-					dispatch(setToGenerateLetters([...toGenerateLetters, `${Object.values(rule)}`]));
+			ruleInputs.forEach((input) => {
+				if (input.text === clickedElementText) {
+					dispatch(setToGenerateLetters([...toGenerateLetters, input.rule]));
 				}
 			});
 		} else {
-			letterRules.forEach((rule) => {
-				if (Object.keys(rule)[0] === clickedElementText) {
-					const filteredArray = toGenerateLetters.filter(
-						(letter) => letter !== Object.values(rule).toString()
-					);
-
+			ruleInputs.forEach((input) => {
+				if (input.text === clickedElementText) {
+					const filteredArray = toGenerateLetters.filter((letter) => letter !== input.rule);
 					dispatch(setToGenerateLetters(filteredArray));
 				}
 			});
@@ -57,7 +51,7 @@ function CharRules() {
 
 	return (
 		<div className="char-rules">
-			{inputTexts.map((text, index) => (
+			{ruleInputs.map((input, index) => (
 				<div className="inputs-wrapper" key={index}>
 					<input
 						id={`checkbox-${index}`}
@@ -66,7 +60,7 @@ function CharRules() {
 						onClick={(e) => handleCharRules(e)}
 					/>
 					<label htmlFor={`checkbox-${index}`} className="checkbox-text">
-						{text}
+						{input.text}
 					</label>
 				</div>
 			))}
