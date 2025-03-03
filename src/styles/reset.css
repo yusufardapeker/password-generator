@@ -36,3 +36,8 @@ button {
 	color: inherit;
 	font: inherit;
 }
+
+input {
+	font-family: inherit;
+	font-size: inherit;
+}
