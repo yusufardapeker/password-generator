@@ -1,8 +1,32 @@
-[The Website](https://password-generator5039.netlify.app/)
-[The Challange](https://www.frontendmentor.io/challenges/password-generator-app-Mr8CLycqjh)
+### Links
+
+Live Site URl: [The Website](https://password-generator5039.netlify.app/)
 
 ### Built with
 
-- [React](https://reactjs.org/)
-- [SASS](https://sass-lang.com/)
-- [Redux Toolkit](https://redux-toolkit.js.org/)
+- React
+- SASS
+- Redux Toolkit
+
+### Installation
+
+1. Clone the repository:
+
+```
+git clone <repository-url>
+cd password-generator
+```
+
+2. Install dependencies:
+
+```
+npm install
+```
+
+3. Start development server
+
+```
+npm run dev
+```
+
+4. Go to http://localhost:5173
