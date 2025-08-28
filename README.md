@@ -1,6 +1,6 @@
 ### Links
 
-Live Site URl: [The Website](https://password-generator5039.netlify.app/)
+Live Site URL: [The Website](https://password-generator5039.netlify.app/)
 
 ### Built with
 
