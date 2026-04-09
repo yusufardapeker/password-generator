@@ -1,5 +1,3 @@
-import React from "react";
-
 import CharLength from "./CharLength";
 import CharRules from "./CharRules";
 import Strength from "./Strength";

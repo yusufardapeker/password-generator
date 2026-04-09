@@ -1,66 +1,23 @@
-import React from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { setToGenerateLetters } from "../../redux/generatorSlice";
+import { setCharRules } from "../../redux/generatorSlice";
 
 function CharRules() {
-	const { toGenerateLetters } = useSelector((store) => store.generator);
+	const { toGenerateChars, ruleInputs } = useSelector((state) => state.generator);
 	const dispatch = useDispatch();
-
-	const ruleInputs = [
-		{
-			text: "Include Uppercase Letters",
-			rule: "ABCDEFGHIJKLMNOPQRSTUVWXYZ",
-		},
-
-		{
-			text: "Include Lowercase Letters",
-			rule: "abcdefghijklmnopqrstuvwxyz",
-		},
-
-		{
-			text: "Include Numbers",
-			rule: "123456789",
-		},
-
-		{
-			text: "Include Symbols",
-			rule: "#$+%&?*",
-		},
-	];
-
-	const handleCharRules = (e) => {
-		const clickedElement = e.target;
-		const isClickedElementChecked = clickedElement.checked;
-		const clickedElementText = clickedElement.parentNode.childNodes[1].textContent;
-
-		if (isClickedElementChecked) {
-			ruleInputs.forEach((input) => {
-				if (input.text === clickedElementText) {
-					dispatch(setToGenerateLetters([...toGenerateLetters, input.rule]));
-				}
-			});
-		} else {
-			ruleInputs.forEach((input) => {
-				if (input.text === clickedElementText) {
-					const filteredArray = toGenerateLetters.filter((letter) => letter !== input.rule);
-					dispatch(setToGenerateLetters(filteredArray));
-				}
-			});
-		}
-	};
 
 	return (
 		<div className="char-rules">
-			{ruleInputs.map((input, index) => (
-				<div className="inputs-wrapper" key={index}>
+			{ruleInputs.map((ruleInput) => (
+				<div className="rule-inputs" key={ruleInput.rule}>
 					<input
-						id={`checkbox-${index}`}
+						id={ruleInput.rule}
 						type="checkbox"
-						className="checkbox-input"
-						onClick={(e) => handleCharRules(e)}
+						className="rule-input"
+						checked={toGenerateChars.includes(ruleInput.rule)}
+						onChange={() => dispatch(setCharRules(ruleInput.rule))}
 					/>
-					<label htmlFor={`checkbox-${index}`} className="checkbox-text">
-						{input.text}
+					<label htmlFor={ruleInput.rule} className="rule-input-label">
+						{ruleInput.text}
 					</label>
 				</div>
 			))}

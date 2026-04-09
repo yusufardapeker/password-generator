@@ -1,32 +1,30 @@
-import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { changeCharLength } from "../../redux/generatorSlice";
+import { setCharLength } from "../../redux/generatorSlice";
+import { useEffect } from "react";
 
 function CharLength() {
-	const { charLength } = useSelector((store) => store.generator);
+	const { charLength } = useSelector((state) => state.generator);
 	const dispatch = useDispatch();
 
-	const inputChange = (e) => {
-		const inputValue = e.target.value;
-		dispatch(changeCharLength(inputValue));
-		document.documentElement.style.setProperty("--track-width", `${inputValue * 5}%`);
-	};
+	useEffect(() => {
+		document.documentElement.style.setProperty("--track-width", `${charLength * 5}%`);
+	}, [charLength]);
 
 	return (
 		<div className="char-length">
 			<div className="char-length-info">
-				<p className="text">Character Length</p>
-				<span className="count">{charLength}</span>
+				<p className="char-length-text">Character Length</p>
+				<p className="char-lenght-count">{charLength}</p>
 			</div>
 
 			<input
 				className="char-length-input"
 				type="range"
-				defaultValue={10}
+				value={charLength}
 				step="1"
 				min="1"
 				max="20"
-				onChange={(e) => inputChange(e)}
+				onChange={(e) => dispatch(setCharLength(e.target.value))}
 			/>
 		</div>
 	);

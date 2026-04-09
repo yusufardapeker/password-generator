@@ -1,0 +1,214 @@
+:root {
+	/* Colors */
+	--black: hsl(0, 0%, 6%);
+	--gray: hsl(219, 29%, 19%);
+	--grayish-blue: hsl(240, 30%, 30%);
+	--green: hsl(172, 100%, 25%);
+	--dark-green: hsl(163, 100%, 18%);
+	--light-green: hsl(156, 56%, 55%);
+	--white: hsl(37, 100%, 93%);
+	--low-opacity-white: hsla(37, 100%, 93%, 0.4);
+
+	/* Gap */
+	--gap-xs: 0.25rem;
+	--gap-s: 0.75rem;
+	--gap-m: 1rem;
+	--gap-l: 1.25rem;
+	--gap-xl: 1.5rem;
+	--gap-xxl: 1.75rem;
+
+	--border-radius-s: 4px;
+
+	--track-width: 50%;
+}
+
+body {
+	background-color: var(--black);
+	color: var(--white);
+	font-size: 1rem;
+	font-family: "Trebuchet MS", "Lucida Sans Unicode", "Lucida Grande", "Lucida Sans", Arial, sans-serif;
+	letter-spacing: 1px;
+}
+
+main {
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	min-height: 100vh;
+}
+
+.container {
+	width: min(90%, 400px);
+
+	.result {
+		background-color: var(--gray);
+		padding: var(--gap-l);
+		border-radius: var(--border-radius-s);
+		display: flex;
+		justify-content: space-between;
+		margin-bottom: var(--gap-l);
+		font-size: 1.15rem;
+
+		.placeholder {
+			color: var(--low-opacity-white);
+		}
+
+		.generated-password {
+			color: var(--white);
+		}
+
+		.copy-button {
+			&:focus-visible {
+				outline: 2px solid var(--white);
+				outline-offset: 4px;
+				border-radius: var(--border-radius-s);
+			}
+
+			.copy-icon {
+				color: var(--green);
+				font-size: 1.5rem;
+			}
+		}
+	}
+
+	.generator {
+		background-color: var(--gray);
+		padding: var(--gap-l);
+		border-radius: var(--border-radius-s);
+		display: flex;
+		flex-direction: column;
+		gap: var(--gap-xxl);
+
+		.char-length {
+			display: flex;
+			flex-direction: column;
+			gap: var(--gap-xl);
+
+			.char-length-info {
+				display: flex;
+				justify-content: space-between;
+			}
+
+			.char-length-input {
+				appearance: none;
+				cursor: pointer;
+				background-color: var(--grayish-blue);
+				border-radius: 9999px;
+
+				&::-webkit-slider-runnable-track {
+					height: 8px;
+					border-radius: 9999px;
+					background: linear-gradient(var(--dark-green) 0 0) no-repeat left / var(--track-width);
+				}
+
+				&::-webkit-slider-thumb {
+					appearance: none;
+					width: 20px;
+					height: 20px;
+					border-radius: 50%;
+					background-color: var(--light-green);
+					margin-top: -6px;
+				}
+
+				&:focus-visible&::-webkit-slider-thumb {
+					outline: 2px solid var(--white);
+					outline-offset: 2px;
+				}
+			}
+		}
+
+		.char-rules {
+			display: flex;
+			flex-direction: column;
+			gap: var(--gap-s);
+
+			.rule-inputs {
+				display: flex;
+				align-items: center;
+				gap: var(--gap-s);
+
+				.rule-input {
+					appearance: none;
+					width: 18px;
+					height: 18px;
+					border: 2px solid var(--white);
+
+					&:checked {
+						background: no-repeat center/cover url("../images/check-mark.png") var(--light-green);
+						border-color: var(--light-green);
+					}
+
+					&:focus-visible {
+						outline: 2px solid var(--white);
+						border-radius: var(--border-radius-s);
+					}
+				}
+			}
+		}
+
+		.strength {
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			text-transform: uppercase;
+			background-color: var(--grayish-blue);
+			padding: var(--gap-s);
+			border-radius: var(--border-radius-s);
+
+			.component-label {
+				color: var(--low-opacity-white);
+			}
+
+			.difficulty {
+				display: flex;
+				align-items: center;
+				gap: var(--gap-m);
+
+				.levels {
+					display: flex;
+					gap: var(--gap-xs);
+
+					.level-bar {
+						width: 8px;
+						height: 24px;
+						border: 1px solid var(--white);
+					}
+				}
+			}
+		}
+
+		.generate {
+			display: flex;
+			flex-direction: column;
+			gap: var(--gap-s);
+
+			.generate-button {
+				background-color: var(--light-green);
+				padding: var(--gap-s);
+				border-radius: var(--border-radius-s);
+
+				&:focus-visible {
+					outline: 2px solid var(--white);
+					outline-offset: 3px;
+				}
+
+				&.disabled {
+					opacity: 0.5;
+				}
+
+				&.disabled + .warning-message {
+					margin-top: 0;
+					opacity: 1;
+				}
+			}
+
+			.warning-message {
+				margin-top: -24px;
+				opacity: 0;
+				transition:
+					margin-top 500ms ease,
+					opacity 500ms ease;
+			}
+		}
+	}
+}
